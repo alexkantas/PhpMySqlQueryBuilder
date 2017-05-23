@@ -1,6 +1,6 @@
 # MySQL Query Builder
 
-#### Simple Query Builer to fetch MySQL Queries into PHP Objects
+Simple Query Builer to fetch MySQL Queries into PHP Objects
 
 ## Set Up
 
@@ -38,19 +38,14 @@ and returns a `PDO`
 
 ## Usage examples
 
-Let's say we've got the following array
+Let's say we've got the following table
 
-user
----
+#### user
 | id | employee_id | user_type | username | password | 
 | -: | -: | - | - | - | 
 | 1 | \N | SUPER ADMIN | admin | admin | 
 | 2 | 1 | NORMAL | robin | robin | 
-| 3 | 2 | ADMIN | taylor | taylor | 
-| 4 | 3 | ADMIN | vivian | vivian | 
-| 5 | 4 | NORMAL | harry | harry | 
-| 6 | 7 | ADMIN | melinda | melinda | 
-| 7 | 8 | NORMAL | harley | harley | 
+| 3 | 2 | ADMIN | taylor | taylor |
 
 Created by the following commands
 ```sql
@@ -121,6 +116,6 @@ Username of user with id 1 is admin
 
 I created this Query Builder for learning purposes and to have it as bootstrap in my applictions
 
-The are a lot of beter implimatations
+The are a lot of reacher and beter implimatations
 
 Of course if you like it, you can use it free under MIT licence. 
