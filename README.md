@@ -2,6 +2,15 @@
 
 Simple Query Builer to fetch MySQL Queries into PHP Objects
 
+#### Table of contencts
+**[Set up](#set-up)**
+**[Info](#info)**
+**[Usage examples](#usage-examples)**
+- **[Select](#select-all)**
+- **[Select Where](#select-where)**
+- **[Insert Into](#insert-into)**
+- **[Delete Where](#delete-where)**
+
 ## Set Up
 
 ```php
@@ -40,7 +49,7 @@ and returns a `PDO`
 
 Let's say we've got the following table
 
-#### user
+##### user
 | id | employee_id | user_type | username | password | 
 | -: | -: | - | - | - | 
 | 1 | \N | SUPER ADMIN | admin | admin | 
@@ -64,12 +73,12 @@ INSERT INTO `user` (`id`, `employee_id`, `user_type`, `username`, `password`) VA
 	(3, 2, 'ADMIN', 'taylor', 'taylor');
 ```
 
-### Select All
+### Select 
 
 ```sql
 $database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
 
-$users = $database->selectAll('user');
+$users = $database->select('user');
 ```
 
 if `var_dump($users)` we take the following output
@@ -110,6 +119,52 @@ and take the following output
 ```
 Username of user with id 1 is admin
 ```
+
+### Select Where
+
+### Insert Into
+
+ Let's say we've got the array above in this readme at line 43
+
+ We excecute
+
+ ```php
+$database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
+
+$insertData = ["employee_id" => '3','user_type' => 'ADMIN', 'username' => 'vivian', 'password' => 'vivian'];
+
+$database->insertInto('user',$insertData);
+ ```
+
+Our table now look like this
+
+##### user
+| id | employee_id | user_type | username | password | 
+| -: | -: | - | - | - | 
+| 1 | \N | SUPER ADMIN | admin | admin | 
+| 2 | 1 | NORMAL | robin | robin | 
+| 3 | 2 | ADMIN | taylor | taylor | 
+| 4 | 3 | ADMIN | vivian | vivian | 
+
+
+### Delete Where
+
+The `user` table looks like this in line 138
+
+```php
+$database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
+
+$database->deleteWhere('user','id','4');
+```
+
+After the above command execute `user` table looks like this below
+
+##### user
+| id | employee_id | user_type | username | password | 
+| -: | -: | - | - | - | 
+| 1 | \N | SUPER ADMIN | admin | admin | 
+| 2 | 1 | NORMAL | robin | robin | 
+| 3 | 2 | ADMIN | taylor | taylor | 
 
 
 ## Info

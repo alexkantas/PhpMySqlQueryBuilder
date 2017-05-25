@@ -10,7 +10,7 @@ class QueryBuilder{
         $this->pdo = $pdo;
     }
 
-    public function selectAll($table){
+    public function select($table){
 
     $statement = $this->pdo->prepare("SELECT * FROM {$table}");
 
@@ -44,26 +44,19 @@ class QueryBuilder{
 
     }
 
-    public function insertInto($table,$data){
+    public function insertInto($table,$data){ //let $table='user' , $data = ["employee_id" => '3','user_type' => 'ADMIN', 'username' => 'vivian', 'lastname' => 'vivian']
 
-    $insertString = "INSERT INTO $table (";
-    $valuesString = "VALUES (";
+    $query = sprintf("INSERT INTO %s (%s) VALUES (%s)",
+    $table,
+    implode(',',array_keys($data)), 
+    ":".implode(', :',array_keys($data))
+    );
 
-    foreach ($data as $key=>$element){
-        $insertString.= $key.",";
-        $valuesString.="'".$element."',";
-    }
+    //$query = "INSERT INTO user (employee_id,user_type,username,lastname) VALUES (:employee_id, :user_type, :username, :lastname)"
 
-    $insertString = substr($insertString,0,-1);
-    $insertString.=") ";
-    $valuesString = substr($valuesString,0,-1);
-    $valuesString.=");";
+    $statement = $this->pdo->prepare($query); 
 
-    $query=$insertString.$valuesString;
-
-    $statement = $this->pdo->prepare($query);
-
-    $statement->execute();
+    $statement->execute($data); //name placeholeders replaced with real arguments
 
     }
 
