@@ -122,6 +122,27 @@ Username of user with id 1 is admin
 
 ### Select Where
 
+The `user` table look like this in line 52
+
+
+```php
+$database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
+
+$users = $database->selectWhere('user','id','2');
+```
+
+After the execution of commands above `var_dump($users)` output is
+
+```
+(array) [Number of elements: 1] 0: 
+  (object) stdClass [Object ID: 5][Number of Properties: 5]
+    id: (string) 2
+    employee_id: (string) 1
+    user_type: (string) NORMAL
+    username: (string) robin
+    password: (string) robin
+```
+
 ### Insert Into
 
  Let's say we've got the array above in this readme at line 43
