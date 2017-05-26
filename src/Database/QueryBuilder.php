@@ -22,13 +22,13 @@ class QueryBuilder{
 
     public function selectWhere($table,$attribute,$value){
     
-    $query = sprintf("SELECT * FROM %s WHERE %s = %s",$table,$attribute,$value);
+    $query = "SELECT * FROM $table WHERE $attribute = $value";
 
     $statement = $this->pdo->prepare($query);
 
     $statement->execute();
 
-    return $statement->fetchAll(\PDO::FETCH_CLASS);
+    return $statement->fetchAll(\PDO::FETCH_OBJ);
 
     }
 
@@ -41,6 +41,25 @@ class QueryBuilder{
     $statement->execute();
 
     return $statement->fetch(\PDO::FETCH_OBJ);
+
+    }
+
+    public function updateWhere($table,$attribute,$value,$setData){
+    
+    $query = sprintf("UPDATE %s set %s WHERE %s=%s",$table,
+    substr(
+    implode(
+    array_map(function ($e){
+         return $e.'=:'.$e.','; },array_keys($setData))
+    ),
+    0,-1),
+    $attribute,
+    $value
+    );
+
+    $statement = $this->pdo->prepare($query);
+
+    $statement->execute($setData);
 
     }
 
@@ -62,13 +81,12 @@ class QueryBuilder{
 
     public function deleteWhere($table,$attribute,$value){
     
-        $query = sprintf("DELETE FROM %s WHERE %s = %s",$table,$attribute,$value);
-        try{
-            $statement = $this->pdo->prepare($query);
-            $statement->execute();
-         } catch (PDOException $e) {
-            die("Oups something wrong: ".$e->getMessage());
-         }
-    }
+    $query = "DELETE FROM $table WHERE $attribute = $value";
+    
+    $statement = $this->pdo->prepare($query);
+    
+    $statement->execute();
 
+    }
+    
 }

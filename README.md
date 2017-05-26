@@ -8,6 +8,7 @@ Simple Query Builer to fetch MySQL Queries into PHP Objects
 **[Usage examples](#usage-examples)**
 - **[Select](#select-all)**
 - **[Select Where](#select-where)**
+- **[Update Where](#update-where)**
 - **[Insert Into](#insert-into)**
 - **[Delete Where](#delete-where)**
 
@@ -142,6 +143,27 @@ After the execution of commands above `var_dump($users)` output is
     username: (string) robin
     password: (string) robin
 ```
+### Update Where
+
+The `user` table looks like this in line ${53}
+
+```php
+$database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
+
+$setData = 
+
+$database->updateWhere('user','id','2');
+```
+
+After the above command execute `user` table looks like this below
+
+##### user
+| id | employee_id | user_type | username | password | 
+| -: | -: | - | - | - | 
+| 1 | \N | SUPER ADMIN | admin | admin | 
+| 2 | 1 | NORMAL | robin | robin | 
+| 3 | 2 | ADMIN | Alex | $Alex$ | 
+
 
 ### Insert Into
 

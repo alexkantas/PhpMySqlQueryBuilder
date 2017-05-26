@@ -6,9 +6,10 @@ use Kantas_net\Database\{QueryBuilder,Connection} ;
 
 $database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
 
-$users = $database->selectWhere('user','id','2');
+//$users = $database->selectWhere('user','id','3');
 
-var_dump($users);
+$setData = ['username' => 'Alex', 'password' => 'Alex'];
 
-die();
+$database->updateWhere('user','id',3,$setData);
+
 echo 'done';
