@@ -3,15 +3,16 @@
 Simple Query Builer to fetch MySQL Queries into PHP Objects
 
 #### Table of contencts
-**[Set up](#set-up)**
-**[Info](#info)**
-**[Usage examples](#usage-examples)**
-- **[Select](#select-all)**
+**[Set up](#set-up)**  
+**[Info](#info)**  
+**[Usage examples](#usage-expamples)**
+- **[Select](#select)**
 - **[Select Where](#select-where)**
 - **[Update Where](#update-where)**
 - **[Insert Into](#insert-into)**
 - **[Delete Where](#delete-where)**
 
+<a name="set-up"></a>
 ## Set Up
 
 ```php
@@ -46,10 +47,21 @@ $database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
 ```
 and returns a `PDO`
 
+<a name="info"></a>
+## Info
+
+I created this Query Builder for learning purposes and to have it as bootstrap in my applictions
+
+I'm actually not suggesting you to use it, since there are a lot of reacher implementations
+
+Of course if you like it, you can use it free under [MIT licence](LICENCE.txt).
+
+<a name="usage-expamples"></a>
 ## Usage examples
 
 Let's say we've got the following table
 
+<a name="user-table"></a>
 ##### user
 | id | employee_id | user_type | username | password | 
 | -: | -: | - | - | - | 
@@ -73,7 +85,7 @@ INSERT INTO `user` (`id`, `employee_id`, `user_type`, `username`, `password`) VA
 	(2, 1, 'NORMAL', 'robin', 'robin'),
 	(3, 2, 'ADMIN', 'taylor', 'taylor');
 ```
-
+<a name="select"></a>
 ### Select 
 
 ```sql
@@ -121,10 +133,10 @@ and take the following output
 Username of user with id 1 is admin
 ```
 
+<a name="select-where"></a>
 ### Select Where
 
-The `user` table look like this in line 52
-
+The `user` table look like this [above](#user-table)
 
 ```php
 $database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
@@ -143,9 +155,11 @@ After the execution of commands above `var_dump($users)` output is
     username: (string) robin
     password: (string) robin
 ```
+
+<a name="update-where"></a>
 ### Update Where
 
-The `user` table looks like this in line ${53}
+The `user` table look like this [above](#user-table)
 
 ```php
 $database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
@@ -164,10 +178,10 @@ After the above command execute `user` table looks like this below
 | 2 | 1 | NORMAL | robin | robin | 
 | 3 | 2 | ADMIN | Alex | $Alex$ | 
 
-
+<a name="insert-into"></a>
 ### Insert Into
 
- Let's say we've got the array above in this readme at line 43
+ The `user` table look like this [above](#user-table)
 
  We excecute
 
@@ -181,6 +195,7 @@ $database->insertInto('user',$insertData);
 
 Our table now look like this
 
+<a name="user-table-1"></a>
 ##### user
 | id | employee_id | user_type | username | password | 
 | -: | -: | - | - | - | 
@@ -189,10 +204,10 @@ Our table now look like this
 | 3 | 2 | ADMIN | taylor | taylor | 
 | 4 | 3 | ADMIN | vivian | vivian | 
 
-
+<a name="delete-where"></a>
 ### Delete Where
 
-The `user` table looks like this in line 138
+The `user` table look like this [above](#user-table-1)
 
 ```php
 $database = new QueryBuilder(Connection::make(require 'Data/configDB.php'));
@@ -208,12 +223,3 @@ After the above command execute `user` table looks like this below
 | 1 | \N | SUPER ADMIN | admin | admin | 
 | 2 | 1 | NORMAL | robin | robin | 
 | 3 | 2 | ADMIN | taylor | taylor | 
-
-
-## Info
-
-I created this Query Builder for learning purposes and to have it as bootstrap in my applictions
-
-The are a lot of reacher and beter implimatations
-
-Of course if you like it, you can use it free under MIT licence. 
