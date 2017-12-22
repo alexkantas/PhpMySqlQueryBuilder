@@ -52,9 +52,7 @@ and returns a `PDO`
 
 I created this Query Builder for learning purposes and to have it as bootstrap in my applictions
 
-I'm actually not suggesting you to use it, since there are a lot of reacher implementations
-
-Of course if you like it, you can use it free under [MIT licence](LICENCE.txt).
+There are a lot of reacher implementations for SQL Query Builder with PHP but if you like mine, you can use it free under [MIT licence](LICENCE.txt).
 
 <a name="usage-expamples"></a>
 ## Usage examples
